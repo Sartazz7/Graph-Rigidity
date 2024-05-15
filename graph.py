@@ -14,7 +14,7 @@ class Utils:
     def tan_inverse(x, y):
         angle = np.arctan(Utils.divide(y, x)) + (np.pi if x < 0 else 0)
         return angle
-    
+
     @staticmethod
     def divide(a, b):
         # if b != 0: return a / b
@@ -133,6 +133,7 @@ class GraphRigidity:
             new_node_positions[u] = self.node_positions[u]
 
         node_velocities = self.velocity()
+        # new_node_positions = self.node_positions + node_velocities
 
         for v, visited_nodes in self.bfs_edge():
             positions = []
@@ -146,7 +147,7 @@ class GraphRigidity:
             new_node_positions[v] = np.mean(np.array(positions, dtype=np.float32), axis=0)
 
         self.node_positions = new_node_positions
-        return new_node_positions, self.edges
+        return self.node_positions, self.edges
 
 
 class Animation:
